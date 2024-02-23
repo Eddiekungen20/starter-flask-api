@@ -3,11 +3,10 @@ from gunicorn.app.wsgiapp import run
 import socket
 from typing import Final
 import os
-from dotenv import load_dotenv
+
 from discord import Intents, Client, Message
 
-load_dotenv()
-TOKEN: Final[str] = os.getenv('DISCORD_TOKEN')
+
 
 intents: Intents = Intents.default()
 intents.message_content = True  # NOQA
@@ -44,7 +43,7 @@ async def on_message(message: Message) -> None:
 
 
 def main() -> None:
-    client.run(TOKEN)
+    client.run(process.env.DISCORD_TOKEN;)
 
 
 
