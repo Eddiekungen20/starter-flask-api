@@ -1,50 +1,14 @@
 import sys
 from gunicorn.app.wsgiapp import run
-import socket
-from typing import Final
-import os
-
-from discord import Intents, Client, Message
+import json
 
 
-
-intents: Intents = Intents.default()
-intents.message_content = True  # NOQA
-client: Client = Client(intents=intents)
-
-
-def send_data_to_mod(data):
-    print("Sieg Heil")
-
-
-async def send_message(message: Message, user_message: str) -> None:
-    if not user_message:
-        print("Message forgor to exist")
-        return
-    await message.channel.send(user_message)
-
-
-@client.event
-async def on_ready() -> None:
-    print(f'{client.user} is now running')
-
-
-@client.event
-async def on_message(message: Message) -> None:
-    if message.author == client.user:
-        return
-
-    username: str = str(message.author)
-    user_message: str = message.content
-    channel: str = str(message.channel)
-
-    print(f'[{channel}] {username}: "{user_message}"')
-    await send_message(message, user_message)
-
-
-def main() -> None:
-    client.run(process.env.DISCORD_TOKEN;)
-
+@app.route('/send_data', methods=['POST'])
+def send_data():
+    data = request.get_json()
+    print("Received data from Minecraft mod:", data)
+    # Process the data as needed
+    return {'status': 'success'}
 
 
 
